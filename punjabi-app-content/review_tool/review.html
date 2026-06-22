@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sikho Punjabi — Content Review</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22253a;
+    --border: #2d3148;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --gurmukhi: #f1c40f;
+    --roman: #93c5fd;
+    --english: #cbd5e1;
+    --accent: #6366f1;
+    --retain: #22c55e;
+    --remove: #ef4444;
+    --edit: #f59e0b;
+    --move: #8b5cf6;
+    --badge-bg: rgba(255,255,255,0.08);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, sans-serif;
+  }
+
+  button, input, select, textarea {
+    font: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  .app-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(15, 17, 23, 0.96);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+  }
+
+  .header-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 16px 22px 12px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(1.05rem, 2vw, 1.45rem);
+    letter-spacing: 0;
+  }
+
+  .header-side {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+  }
+
+  .stats-bar {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .save-status {
+    min-width: 74px;
+    color: var(--roman);
+    font-size: 0.85rem;
+    text-align: right;
+  }
+
+  .test-toggle {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 11px;
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .test-panel {
+    display: none;
+    margin: 0 22px 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .test-panel.open { display: block; }
+  .test-panel .ok { color: var(--retain); }
+  .test-panel .warn { color: var(--edit); }
+  .test-panel .err { color: var(--remove); }
+
+  .tabs {
+    display: flex;
+    gap: 6px;
+    padding: 0 22px;
+    overflow-x: auto;
+  }
+
+  .tab-button {
+    border: 0;
+    border-bottom: 3px solid transparent;
+    padding: 11px 14px 10px;
+    background: transparent;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .tab-button.active {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+
+  main {
+    padding: 22px;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .stream-selector,
+  .controls-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .pill,
+  .chip {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 12px;
+    background: var(--surface);
+    color: var(--text-muted);
+    line-height: 1.1;
+  }
+
+  .pill.active,
+  .chip.active {
+    border-color: var(--accent);
+    background: var(--surface2);
+    color: var(--text);
+  }
+
+  .search-input {
+    width: min(420px, 100%);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 10px 12px;
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .search-input:focus,
+  select:focus,
+  textarea:focus {
+    outline: 2px solid rgba(99, 102, 241, 0.35);
+    outline-offset: 1px;
+    border-color: var(--accent);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 16px;
+  }
+
+  .content-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    min-width: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    background: var(--surface);
+  }
+
+  .decision-dot {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #64748b;
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
+  }
+
+  .decision-dot.retain { background: var(--retain); }
+  .decision-dot.remove { background: var(--remove); }
+  .decision-dot.edit { background: var(--edit); }
+  .decision-dot.move { background: var(--move); }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding-right: 18px;
+  }
+
+  .badge,
+  .tag-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 22px;
+    border-radius: 999px;
+    padding: 3px 8px;
+    background: var(--badge-bg);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.2;
+  }
+
+  .id-badge {
+    color: var(--roman);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  .card-title {
+    margin: 2px 0 0;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
+
+  .muted {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .gurmukhi {
+    color: var(--gurmukhi);
+    font-size: 1.3em;
+    line-height: 1.75;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .first-line {
+    font-size: 1.4em;
+  }
+
+  .roman {
+    color: var(--roman);
+    line-height: 1.65;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .english {
+    color: var(--english);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .centered {
+    text-align: center;
+  }
+
+  .large-text {
+    font-size: 1.65rem;
+    font-weight: 700;
+  }
+
+  .excerpt-toggle {
+    align-self: flex-start;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 10px;
+    background: var(--surface2);
+    color: var(--text);
+  }
+
+  .excerpt-body {
+    display: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 13px;
+    background: rgba(15, 17, 23, 0.55);
+  }
+
+  .excerpt-body.open {
+    display: grid;
+    gap: 11px;
+  }
+
+  .callout {
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 11px 12px;
+    background: rgba(255,255,255,0.035);
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.55;
+  }
+
+  .chip-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .feedback-widget {
+    display: grid;
+    gap: 9px;
+    margin-top: auto;
+    padding-top: 13px;
+    border-top: 1px solid var(--border);
+  }
+
+  .feedback-widget select,
+  .feedback-widget textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .feedback-widget select {
+    padding: 9px 10px;
+  }
+
+  .feedback-widget textarea {
+    min-height: 66px;
+    padding: 10px;
+    resize: vertical;
+  }
+
+  .loader,
+  .message {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    background: var(--surface);
+    color: var(--text-muted);
+  }
+
+  .loader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  .hidden { display: none !important; }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @media (max-width: 760px) {
+    .header-main {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .header-side {
+      justify-content: flex-start;
+    }
+
+    .stats-bar {
+      white-space: normal;
+    }
+
+    main {
+      padding: 16px;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="header-main">
+    <h1>Sikho Punjabi — Content Review</h1>
+    <div class="header-side">
+      <div id="statsBar" class="stats-bar">0 retained / 0 removed / 0 flagged / 0 total reviewed</div>
+      <div id="saveStatus" class="save-status" aria-live="polite"></div>
+      <button id="testToggle" class="test-toggle" type="button" aria-expanded="false">Test Panel</button>
+    </div>
+  </div>
+  <div id="testPanel" class="test-panel" aria-live="polite"></div>
+  <nav class="tabs" aria-label="Review sections">
+    <button class="tab-button active" type="button" data-tab="streams">Cultural Streams</button>
+    <button class="tab-button" type="button" data-tab="vocab">Vocab</button>
+    <button class="tab-button" type="button" data-tab="proverbs">Proverbs</button>
+  </nav>
+</header>
+
+<main>
+  <section id="streamsTab" class="tab-panel active" aria-label="Cultural Streams">
+    <div id="streamSelector" class="stream-selector"></div>
+    <div id="streamsContent"><div class="loader"><span class="spinner"></span>Loading cultural streams...</div></div>
+  </section>
+
+  <section id="vocabTab" class="tab-panel" aria-label="Vocab">
+    <div class="controls-bar">
+      <input id="vocabSearch" class="search-input" type="search" placeholder="Search Gurmukhi or English...">
+      <div id="sourceFilters" class="stream-selector" aria-label="Source filters"></div>
+    </div>
+    <div id="vocabContent"><div class="loader"><span class="spinner"></span>Loading vocab...</div></div>
+  </section>
+
+  <section id="proverbsTab" class="tab-panel" aria-label="Proverbs">
+    <div class="controls-bar">
+      <input id="proverbsSearch" class="search-input" type="search" placeholder="Search Gurmukhi or English...">
+    </div>
+    <div id="proverbsContent"><div class="loader"><span class="spinner"></span>Loading proverbs...</div></div>
+  </section>
+</main>
+
+<script>
+  const streamConfig = [
+    { key: "s1", code: "S1", label: "Gurbani" },
+    { key: "s2", code: "S2", label: "Sufi/Kafi" },
+    { key: "s3", code: "S3", label: "Kissa" },
+    { key: "s4", code: "S4", label: "Medieval" },
+    { key: "s5", code: "S5", label: "Modern Lit" },
+    { key: "s6", code: "S6", label: "Folk/Lok Geet" },
+    { key: "s7", code: "S7", label: "Boliyan" },
+    { key: "s8", code: "S8", label: "Songs" },
+    { key: "s9", code: "S9", label: "Dasam Granth" }
+  ];
+  const sourceOptions = ["all", "discoversikhism", "learnpunjabi", "elearnpunjabi", "omniglot", "wiktionary"];
+  const actionClasses = ["retain", "remove", "edit", "move"];
+  const tabMap = {
+    streams: document.getElementById("streamsTab"),
+    vocab: document.getElementById("vocabTab"),
+    proverbs: document.getElementById("proverbsTab")
+  };
+
+  let streamsData = {};
+  let vocabData = [];
+  let proverbsData = [];
+  let feedbackState = {};
+  let activeStream = "s1";
+  let activeSource = "all";
+  let saveTimer = null;
+  let savedClearTimer = null;
+  let testResults = [];
+
+  window.feedbackState = feedbackState;
+
+  function esc(value) {
+    if (value === null || value === undefined) return "";
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function normalize(value) {
+    return String(value || "").toLowerCase();
+  }
+
+  function itemId(item) {
+    return item && item.id ? String(item.id) : "";
+  }
+
+  function fieldLine(parts) {
+    const clean = parts.filter(Boolean);
+    return clean.length ? `<div class="muted">${clean.map(esc).join(" / ")}</div>` : "";
+  }
+
+  function badge(value, cls = "") {
+    return value ? `<span class="badge ${cls}">${esc(value)}</span>` : "";
+  }
+
+  function renderFeedbackWidget(id) {
+    return `
+      <div class="feedback-widget" data-feedback-for="${esc(id)}">
+        <select data-role="action" aria-label="Review action for ${esc(id)}">
+          <option value="">No action</option>
+          <option value="retain">retain</option>
+          <option value="remove">remove</option>
+          <option value="edit">edit</option>
+          <option value="move">move</option>
+        </select>
+        <textarea data-role="comment" rows="2" placeholder="Comment (optional)..." aria-label="Comment for ${esc(id)}"></textarea>
+      </div>
+    `;
+  }
+
+  function renderCardShell(id, searchText, body, extraAttrs = "") {
+    return `
+      <article class="content-card" data-id="${esc(id)}" data-search="${esc(normalize(searchText))}" ${extraAttrs}>
+        <span class="decision-dot" data-dot-for="${esc(id)}"></span>
+        ${body}
+        ${renderFeedbackWidget(id)}
+      </article>
+    `;
+  }
+
+  function renderStreams() {
+    const selector = document.getElementById("streamSelector");
+    selector.innerHTML = streamConfig.map(stream => `
+      <button class="pill ${stream.key === activeStream ? "active" : ""}" type="button" data-stream="${stream.key}">
+        ${stream.code}: ${esc(stream.label)}
+      </button>
+    `).join("");
+
+    const items = streamsData[activeStream] || [];
+    document.getElementById("streamsContent").innerHTML = items.length
+      ? `<div class="grid">${items.map(renderStreamCard).join("")}</div>`
+      : `<div class="message">No items found for this stream.</div>`;
+    applyFeedbackToWidgets();
+  }
+
+  function renderStreamCard(item) {
+    const id = itemId(item);
+    const stream = streamConfig.find(s => s.key === activeStream) || {};
+    const header = `
+      <div class="card-header">
+        ${badge(id, "id-badge")}
+        ${badge(stream.code || activeStream.toUpperCase())}
+        ${badge(item.form)}
+        ${badge(item.register)}
+      </div>
+    `;
+    const title = item.title ? `<h2 class="card-title">${esc(item.title)}</h2>` : "";
+    const source = fieldLine([item.author, item.source_bani, item.source_granth, item.ang_or_location, item.citation_signal]);
+    const firstLine = item.first_line_gurmukhi ? `<div class="gurmukhi first-line">${esc(item.first_line_gurmukhi)}</div>` : "";
+    const excerpt = (item.full_excerpt_gurmukhi || item.romanization || item.english_meaning) ? `
+      <button class="excerpt-toggle" type="button" aria-expanded="false">Show full excerpt ▼</button>
+      <div class="excerpt-body">
+        ${item.full_excerpt_gurmukhi ? `<div class="gurmukhi">${esc(item.full_excerpt_gurmukhi)}</div>` : ""}
+        ${item.romanization ? `<div class="roman">${esc(item.romanization)}</div>` : ""}
+        ${item.english_meaning ? `<div class="english">${esc(item.english_meaning)}</div>` : ""}
+      </div>
+    ` : "";
+    const why = item.why_dense ? `<div class="callout">${esc(item.why_dense)}</div>` : "";
+    const selectionReason = item.selection_reason ? `<div class="callout">${esc(item.selection_reason)}</div>` : "";
+    const searchText = [item.title, item.first_line_gurmukhi, item.full_excerpt_gurmukhi, item.english_meaning, item.author, item.source_bani, item.source_granth].join(" ");
+
+    return renderCardShell(id, searchText, header + title + source + firstLine + excerpt + why + selectionReason);
+  }
+
+  function renderVocab() {
+    document.getElementById("sourceFilters").innerHTML = sourceOptions.map(source => `
+      <button class="chip ${source === activeSource ? "active" : ""}" type="button" data-source="${source}">${esc(source === "all" ? "All" : source)}</button>
+    `).join("");
+
+    document.getElementById("vocabContent").innerHTML = vocabData.length
+      ? `<div class="grid">${vocabData.map(renderVocabCard).join("")}</div>`
+      : `<div class="message">No vocab items found.</div>`;
+    applyFeedbackToWidgets();
+    filterVocab();
+  }
+
+  function renderVocabCard(item) {
+    const id = itemId(item);
+    const tags = Array.isArray(item.tags) ? item.tags : [];
+    const tagHtml = tags.map(tag => `<span class="tag-chip">${esc(tag)}</span>`).join("");
+    const body = `
+      ${item.gurmukhi ? `<div class="gurmukhi large-text centered">${esc(item.gurmukhi)}</div>` : ""}
+      ${item.roman_readable ? `<div class="roman centered">${esc(item.roman_readable)}</div>` : ""}
+      ${item.english ? `<div class="english centered">${esc(item.english)}</div>` : ""}
+      <div class="chip-row">
+        ${badge(item.part_of_speech)}
+        ${tagHtml}
+      </div>
+    `;
+    return renderCardShell(
+      id,
+      `${item.gurmukhi || ""} ${item.english || ""}`,
+      body,
+      `data-source="${esc(item.source || "")}"`
+    );
+  }
+
+  function renderProverbs(status503) {
+    if (status503) {
+      document.getElementById("proverbsContent").innerHTML = `<div class="message">Proverbs still being generated — check back later</div>`;
+      return;
+    }
+
+    document.getElementById("proverbsContent").innerHTML = proverbsData.length
+      ? `<div class="grid">${proverbsData.map(renderProverbCard).join("")}</div>`
+      : `<div class="message">No proverbs found.</div>`;
+    applyFeedbackToWidgets();
+    filterProverbs();
+  }
+
+  function renderProverbCard(item) {
+    const id = itemId(item);
+    const romanReadable = item.roman && typeof item.roman === "object" ? item.roman.readable : item.roman_readable;
+    const body = `
+      ${item.gurmukhi ? `<div class="gurmukhi large-text centered">${esc(item.gurmukhi)}</div>` : ""}
+      ${romanReadable ? `<div class="roman centered">${esc(romanReadable)}</div>` : ""}
+      ${item.english ? `<div class="english centered">${esc(item.english)}</div>` : ""}
+      ${item.cultural_note ? `<div class="muted centered"><em>${esc(item.cultural_note)}</em></div>` : ""}
+      <div class="chip-row">
+        ${item.selection_theme ? `<span class="tag-chip">${esc(item.selection_theme)}</span>` : ""}
+      </div>
+      ${item.selection_reason ? `<div class="callout">${esc(item.selection_reason)}</div>` : ""}
+    `;
+    return renderCardShell(id, `${item.gurmukhi || ""} ${item.english || ""}`, body);
+  }
+
+  function applyFeedbackToWidgets() {
+    document.querySelectorAll(".feedback-widget").forEach(widget => {
+      const id = widget.dataset.feedbackFor;
+      const state = feedbackState[id] || {};
+      widget.querySelector('[data-role="action"]').value = state.action || "";
+      widget.querySelector('[data-role="comment"]').value = state.comment || "";
+      updateCardDot(id, state.action || "");
+    });
+    updateStats();
+  }
+
+  function updateCardDot(id, action) {
+    document.querySelectorAll(`[data-dot-for="${CSS.escape(id)}"]`).forEach(dot => {
+      dot.classList.remove(...actionClasses);
+      if (actionClasses.includes(action)) dot.classList.add(action);
+    });
+  }
+
+  function onFeedbackInput(event) {
+    const widget = event.target.closest(".feedback-widget");
+    if (!widget) return;
+
+    const id = widget.dataset.feedbackFor;
+    const action = widget.querySelector('[data-role="action"]').value;
+    const comment = widget.querySelector('[data-role="comment"]').value;
+    feedbackState[id] = { action, comment };
+    updateCardDot(id, action);
+    updateStats();
+    scheduleSave();
+  }
+
+  function scheduleSave() {
+    clearTimeout(saveTimer);
+    document.getElementById("saveStatus").textContent = "Saving...";
+    saveTimer = setTimeout(saveFeedback, 500);
+  }
+
+  async function saveFeedback() {
+    try {
+      const response = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(feedbackState)
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      showSaved();
+    } catch (error) {
+      document.getElementById("saveStatus").textContent = "Save failed";
+      addTestResult("err", `Feedback save failed: ${error.message}`);
+      renderTestPanel();
+    }
+  }
+
+  function showSaved() {
+    const status = document.getElementById("saveStatus");
+    clearTimeout(savedClearTimer);
+    status.textContent = "Saved ✓";
+    savedClearTimer = setTimeout(() => { status.textContent = ""; }, 2000);
+  }
+
+  function updateStats() {
+    const counts = { retain: 0, remove: 0, edit: 0, move: 0 };
+    Object.values(feedbackState).forEach(entry => {
+      const action = entry && entry.action;
+      if (Object.prototype.hasOwnProperty.call(counts, action)) counts[action] += 1;
+    });
+    const flagged = counts.edit + counts.move;
+    const totalReviewed = counts.retain + counts.remove + counts.edit + counts.move;
+    document.getElementById("statsBar").textContent =
+      `${counts.retain} retained / ${counts.remove} removed / ${flagged} flagged / ${totalReviewed} total reviewed`;
+  }
+
+  function filterVocab() {
+    const query = normalize(document.getElementById("vocabSearch").value);
+    document.querySelectorAll("#vocabContent .content-card").forEach(card => {
+      const matchesText = !query || card.dataset.search.includes(query);
+      const matchesSource = activeSource === "all" || card.dataset.source === activeSource;
+      card.classList.toggle("hidden", !(matchesText && matchesSource));
+    });
+  }
+
+  function filterProverbs() {
+    const query = normalize(document.getElementById("proverbsSearch").value);
+    document.querySelectorAll("#proverbsContent .content-card").forEach(card => {
+      card.classList.toggle("hidden", Boolean(query) && !card.dataset.search.includes(query));
+    });
+  }
+
+  function addTestResult(kind, text) {
+    testResults.push({ kind, text });
+  }
+
+  function renderTestPanel() {
+    const panel = document.getElementById("testPanel");
+    panel.innerHTML = testResults.length
+      ? testResults.map(result => `<div class="${result.kind}">${esc(result.text)}</div>`).join("")
+      : `<div class="warn">Loading validation results...</div>`;
+  }
+
+  function countStreamItems(streams) {
+    return Object.values(streams).reduce((sum, items) => sum + (Array.isArray(items) ? items.length : 0), 0);
+  }
+
+  async function fetchJson(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+      const error = new Error(`HTTP ${response.status}`);
+      error.status = response.status;
+      throw error;
+    }
+    return response.json();
+  }
+
+  async function loadData() {
+    const streamsPromise = fetchJson("/api/data/streams");
+    const vocabPromise = fetchJson("/api/data/vocab");
+    const proverbsPromise = fetchJson("/api/data/proverbs").then(
+      data => ({ data, status503: false }),
+      error => {
+        if (error.status === 503) return { data: [], status503: true };
+        throw error;
+      }
+    );
+    const feedbackPromise = fetchJson("/api/feedback");
+
+    const results = await Promise.allSettled([streamsPromise, vocabPromise, proverbsPromise, feedbackPromise]);
+    const [streamsResult, vocabResult, proverbsResult, feedbackResult] = results;
+
+    if (streamsResult.status === "fulfilled") {
+      streamsData = streamsResult.value || {};
+      addTestResult("ok", `✓ Streams loaded: ${countStreamItems(streamsData)} items across ${streamConfig.length} streams`);
+      renderStreams();
+    } else {
+      document.getElementById("streamsContent").innerHTML = `<div class="message">Unable to load streams.</div>`;
+      addTestResult("err", `Streams error: ${streamsResult.reason.message}`);
+    }
+
+    if (vocabResult.status === "fulfilled") {
+      vocabData = Array.isArray(vocabResult.value) ? vocabResult.value : [];
+      addTestResult("ok", `✓ Vocab loaded: ${vocabData.length} items`);
+      renderVocab();
+    } else {
+      document.getElementById("vocabContent").innerHTML = `<div class="message">Unable to load vocab.</div>`;
+      addTestResult("err", `Vocab error: ${vocabResult.reason.message}`);
+    }
+
+    if (proverbsResult.status === "fulfilled") {
+      proverbsData = Array.isArray(proverbsResult.value.data) ? proverbsResult.value.data : [];
+      if (proverbsResult.value.status503) {
+        addTestResult("warn", "Proverbs still being generated — check back later");
+      } else {
+        addTestResult("ok", `✓ Proverbs loaded: ${proverbsData.length} items`);
+      }
+      renderProverbs(proverbsResult.value.status503);
+    } else {
+      document.getElementById("proverbsContent").innerHTML = `<div class="message">Unable to load proverbs.</div>`;
+      addTestResult("err", `Proverbs error: ${proverbsResult.reason.message}`);
+    }
+
+    if (feedbackResult.status === "fulfilled") {
+      feedbackState = feedbackResult.value && typeof feedbackResult.value === "object" ? feedbackResult.value : {};
+      window.feedbackState = feedbackState;
+      addTestResult("ok", `✓ Feedback loaded: ${Object.keys(feedbackState).length} items with decisions`);
+      applyFeedbackToWidgets();
+    } else {
+      addTestResult("err", `Feedback error: ${feedbackResult.reason.message}`);
+    }
+
+    renderTestPanel();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelector(".tabs").addEventListener("click", event => {
+      const button = event.target.closest(".tab-button");
+      if (!button) return;
+      document.querySelectorAll(".tab-button").forEach(tab => tab.classList.toggle("active", tab === button));
+      Object.entries(tabMap).forEach(([key, panel]) => panel.classList.toggle("active", key === button.dataset.tab));
+    });
+
+    document.getElementById("testToggle").addEventListener("click", event => {
+      const panel = document.getElementById("testPanel");
+      panel.classList.toggle("open");
+      event.currentTarget.setAttribute("aria-expanded", String(panel.classList.contains("open")));
+    });
+
+    document.getElementById("streamSelector").addEventListener("click", event => {
+      const button = event.target.closest("[data-stream]");
+      if (!button) return;
+      activeStream = button.dataset.stream;
+      renderStreams();
+    });
+
+    document.getElementById("sourceFilters").addEventListener("click", event => {
+      const button = event.target.closest("[data-source]");
+      if (!button) return;
+      activeSource = button.dataset.source;
+      document.querySelectorAll("#sourceFilters .chip").forEach(chip => chip.classList.toggle("active", chip === button));
+      filterVocab();
+    });
+
+    document.addEventListener("click", event => {
+      const button = event.target.closest(".excerpt-toggle");
+      if (!button) return;
+      const body = button.nextElementSibling;
+      const isOpen = body.classList.toggle("open");
+      button.setAttribute("aria-expanded", String(isOpen));
+      button.textContent = isOpen ? "Hide full excerpt ▲" : "Show full excerpt ▼";
+    });
+
+    document.addEventListener("change", onFeedbackInput);
+    document.addEventListener("input", event => {
+      if (event.target.matches("#vocabSearch")) filterVocab();
+      if (event.target.matches("#proverbsSearch")) filterProverbs();
+      if (event.target.closest(".feedback-widget")) onFeedbackInput(event);
+    });
+
+    renderTestPanel();
+    loadData();
+  });
+</script>
+</body>
+</html>

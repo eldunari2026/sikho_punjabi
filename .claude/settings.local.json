@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.panjabdigilib.org)",
+      "WebFetch(domain:www.elearnpunjabi.com)",
+      "WebFetch(domain:pt.learnpunjabi.org)",
+      "Bash(codex *)"
+    ]
+  }
+}

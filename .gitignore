@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+env/
+.env
+
+# Local review tool state (not deployed)
+punjabi-app-content/review_tool/feedback.json
+
+# Large source data — generated static files in public/data/ are committed instead
+punjabi-app-content/processed_data/
+punjabi-app-content/raw_data/
+punjabi-app-content/logs/
+punjabi-app-content/session_work/
+punjabi-app-content/schemas/
+punjabi-app-content/enrichment/
+punjabi-app-content/scripts/
+
+# macOS
+.DS_Store
+*.sqlite
+*.sqlite3
