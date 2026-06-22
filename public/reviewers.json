@@ -1,3 +1,9 @@
 [
-  { "name": "Arjun", "role": "master" }
+  { "name": "Arjun", "role": "master" },
+  { "name": "Heerat", "role": "reviewer" },
+  { "name": "Japneet", "role": "reviewer" },
+  { "name": "Simi", "role": "reviewer" },
+  { "name": "Manav", "role": "reviewer" },
+  { "name": "Kiran", "role": "reviewer" },
+  { "name": "Daljeet", "role": "reviewer" }
 ]
