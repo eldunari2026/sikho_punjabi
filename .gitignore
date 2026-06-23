@@ -22,3 +22,4 @@ punjabi-app-content/scripts/
 .DS_Store
 *.sqlite
 *.sqlite3
+.vercel
