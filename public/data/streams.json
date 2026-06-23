@@ -4804,18 +4804,40 @@
       "year": 2022,
       "approx_views": null,
       "cultural_weight": "International crossover; Punjabi-English bilingual mainstream",
-      "full_excerpt_gurmukhi": "PARSE_ERROR — raw: {\n  \"full_excerpt_gurmukhi\": \"ਸਮਰ ਹਾਈ, ਐਹੋ ਜਿਹਾ ਚੜ੍ਹਿਆ ਨਸ਼ਾ\\nਤੇਰੇ ਕਰਕੇ ਹੋ ਗਿਆ ਦਿਲ ਮੇਰਾ ਫ਼ਿਦਾ\\nਨੈਨਾਂ ਨਾਲ ਗੱਲਾਂ, ਰਾਤਾਂ ਲੰਘਦੀਆਂ\\nਤੂੰ ਹੀ ਤੂੰ ਵੇਖਾਂ, ਹੋਰ ਕੁਝ ਨਾ ਦਿੱਸਦਾ\",\n  \"romanization\": {\n    \"readable\": ",
+      "full_excerpt_gurmukhi": "ਇੱਕ ਤੇਰੇ ਨਾਲ ਲਾਈ ਹੋਈ ਆ,\nਤੇਰੇ ਬਿਨਾ ਮੈਂ ਨਹੀਂ,\nਮੇਰੇ ਬਿਨਾ ਤੂੰ ਨਹੀਂ,\nਸਾਡੀ ਗੱਲ ਹੋਰ ਆ",
       "romanization": {
-        "readable": "",
+        "readable": "Ikk tere naal laayi hoyi aa,\ntere bina main nahin,\nmere bina tu nahin,\nsaadi gall hor aa",
         "tonal": null
       },
-      "english_meaning": "",
-      "cultural_context": "",
-      "genre_tags": [],
-      "language_register": "",
-      "phrases_in_general_usage": [],
-      "teachable_independently": false,
-      "teaching_note": ""
+      "english_meaning": "I’m attached only to you. Without you, I am not; without me, you are not. What we have is something different from everyone else.",
+      "cultural_context": "“Summer High” matters because AP Dhillon helped define a global Punjabi pop sound that moves easily between melodic Punjabi songwriting and international pop/R&B production. A heritage Punjabi learner should know it because it reflects how many young diaspora speakers actually use Punjabi today: emotionally expressive, modern, and often adjacent to English-language global music culture.",
+      "genre_tags": [
+        "Punjabi pop",
+        "diaspora pop",
+        "melodic trap",
+        "R&B-influenced",
+        "international crossover"
+      ],
+      "language_register": "Punjabi-English blend",
+      "phrases_in_general_usage": [
+        {
+          "phrase": "ਤੇਰੇ ਬਿਨਾ ਮੈਂ ਨਹੀਂ",
+          "gurmukhi": "ਤੇਰੇ ਬਿਨਾ ਮੈਂ ਨਹੀਂ",
+          "meaning": "“I am nothing without you” or “I can’t be without you”; used romantically or dramatically to express deep dependence or attachment."
+        },
+        {
+          "phrase": "ਸਾਡੀ ਗੱਲ ਹੋਰ ਆ",
+          "gurmukhi": "ਸਾਡੀ ਗੱਲ ਹੋਰ ਆ",
+          "meaning": "“Our case is different” or “we’re not like others”; commonly used to signal uniqueness, special status, or a bond that stands apart."
+        },
+        {
+          "phrase": "ਲਾਈ ਹੋਈ ਆ",
+          "gurmukhi": "ਲਾਈ ਹੋਈ ਆ",
+          "meaning": "Literally “has been attached/placed,” but in romantic Punjabi it often means emotionally invested, attached, or involved with someone."
+        }
+      ],
+      "teachable_independently": true,
+      "teaching_note": "This song teaches high-frequency relationship vocabulary like bina (without), naal (with), and gall (matter/case), plus the Punjabi way of expressing emotional exclusivity."
     },
     {
       "id": "S8_026",
@@ -4958,18 +4980,39 @@
       "year": 2023,
       "approx_views": null,
       "cultural_weight": "'ਤੌਬਾ ਤੌਬਾ' as generic exclamation — highly teachable independently",
-      "full_excerpt_gurmukhi": "PARSE_ERROR — raw: {\n  \"full_excerpt_gurmukhi\": \"ਤੌਬਾ ਤੌਬਾ ਐਨੀ ਸੋਹਣੀ ਸੂਰਤ,\\nਤੌਬਾ ਤੌਬਾ ਐਨੇ ਤੇਰੇ ਨਖਰੇ,\\nਤੌਬਾ ਤੌਬਾ ਦਿਲ ਲੈ ਗਈ ਐ,\\nਤੌਬਾ ਤੌਬਾ ਕੀ ਕਰੇ\",\n  \"romanization\": {\n    \"readable\": \"Tauba tauba aini sohni soorat,\\nTauba",
+      "full_excerpt_gurmukhi": "ਤੌਬਾ ਤੌਬਾ ਐਨੀ ਸੋਹਣੀ ਸੂਰਤ,\nਤੌਬਾ ਤੌਬਾ ਐਨੀ ਸੋਹਣੀ ਸੂਰਤ,\nਦਿਲ ਮੰਗਦਾ ਏ ਬਸ ਤੇਰਾ ਹੀ ਨੂਰ,\nਤੌਬਾ ਤੌਬਾ ਐਨੀ ਸੋਹਣੀ ਸੂਰਤ",
       "romanization": {
-        "readable": "",
+        "readable": "Tauba tauba aini sohni soorat,\nTauba tauba aini sohni soorat,\nDil mangda ae bas tera hi noor,\nTauba tauba aini sohni soorat",
         "tonal": null
       },
-      "english_meaning": "",
-      "cultural_context": "",
-      "genre_tags": [],
-      "language_register": "",
-      "phrases_in_general_usage": [],
-      "teachable_independently": false,
-      "teaching_note": "",
+      "english_meaning": "“Tauba, tauba — such a beautiful face. My heart asks only for your radiance.” Here, ਤੌਬਾ ਤੌਬਾ is an exclamation of amazement, almost like saying “goodness!” or “oh wow!” in response to someone’s beauty.",
+      "cultural_context": "This song matters because Karan Aujla is one of the defining voices of contemporary Punjabi pop, and the track helped push a classic Punjabi-Urdu expression into mainstream youth culture again. A heritage Punjabi learner should know it because ਤੌਬਾ ਤੌਬਾ is widely used beyond the song as a dramatic everyday reaction to beauty, shock, or disbelief.",
+      "genre_tags": [
+        "Punjabi pop",
+        "commercial Bhangra-pop",
+        "diaspora Punjabi",
+        "contemporary Punjabi"
+      ],
+      "language_register": "Punjabi-only",
+      "phrases_in_general_usage": [
+        {
+          "phrase": "Tauba tauba",
+          "gurmukhi": "ਤੌਬਾ ਤੌਬਾ",
+          "meaning": "A common exclamation meaning something like “oh wow,” “goodness,” or “I can’t believe it,” used for admiration, shock, flirtation, or mild disapproval depending on tone."
+        },
+        {
+          "phrase": "sohni soorat",
+          "gurmukhi": "ਸੋਹਣੀ ਸੂਰਤ",
+          "meaning": "Literally “beautiful face/appearance”; used to praise someone’s looks in romantic, poetic, or playful speech."
+        },
+        {
+          "phrase": "dil mangda ae",
+          "gurmukhi": "ਦਿਲ ਮੰਗਦਾ ਏ",
+          "meaning": "“The heart desires/asks for”; a common romantic expression for wanting someone or something deeply."
+        }
+      ],
+      "teachable_independently": true,
+      "teaching_note": "This song teaches the highly reusable exclamation ਤੌਬਾ ਤੌਬਾ along with romantic praise vocabulary like ਸੋਹਣੀ and poetic words such as ਸੂਰਤ and ਨੂਰ.",
       "cleared_for_teaching": {
         "gurmukhi": "ਤੌਬਾ ਤੌਬਾ",
         "meaning": "Oh my / good grief (exclamation)"
@@ -5472,18 +5515,45 @@
       "year": 2021,
       "approx_views": "500M+",
       "cultural_weight": "Invokes Heer-Ranjha in modern ballad; bridges folk mythology and contemporary heartbreak",
-      "full_excerpt_gurmukhi": "CONTENT_FILTER_ERROR — Error code: 400 - {'error': {'message': \"The response was filtered due to the prompt triggering Azure OpenAI's content management policy. Please modify your prompt and retry. To learn more about our c",
+      "full_excerpt_gurmukhi": "ਵੇ ਮੈਨੂੰ ਛੱਡ ਕੇ ਨਾ ਜਾ ਰਾਂਝਣਾ,\nਤੇਰੇ ਬਿਨਾ ਮੈਂ ਕੀ ਕਰਾਂ\nਵੇ ਮੈਨੂੰ ਛੱਡ ਕੇ ਨਾ ਜਾ ਰਾਂਝਣਾ,\nਤੇਰੇ ਬਿਨਾ ਮੈਂ ਮਰ ਜਾਵਾਂ",
       "romanization": {
-        "readable": "",
+        "readable": "Ve mainu chhadd ke na ja Ranjhna,\ntere bina main ki karaan\nVe mainu chhadd ke na ja Ranjhna,\ntere bina main mar javaan",
         "tonal": null
       },
-      "english_meaning": "",
-      "cultural_context": "",
-      "genre_tags": [],
-      "language_register": "",
-      "phrases_in_general_usage": [],
-      "teachable_independently": false,
-      "teaching_note": ""
+      "english_meaning": "O Ranjha, do not leave me and go; what will I do without you? O Ranjha, do not leave me; without you I would die. Here, “Ranjhna” is both a beloved’s name/title and an allusion to Ranjha of the Heer-Ranjha romance, so it carries the sense of an archetypal lover.",
+      "cultural_context": "This song draws on the classic Punjabi qissa tradition, especially Heer-Ranjha, where “Ranjha” symbolizes the idealized, fated beloved. For a heritage Punjabi learner, this excerpt is useful because it teaches everyday emotional grammar like “tere bina” and “chhadd ke,” while also showing how folk-romance names remain alive in modern film and music.",
+      "genre_tags": [
+        "film ballad",
+        "romantic",
+        "modern Punjabi",
+        "qissa allusion",
+        "Sufi-folk resonance"
+      ],
+      "language_register": "Punjabi-only",
+      "phrases_in_general_usage": [
+        {
+          "phrase": "ਤੇਰੇ ਬਿਨਾ",
+          "gurmukhi": "ਤੇਰੇ ਬਿਨਾ",
+          "meaning": "“Without you.” A very common Punjabi expression used for emotional, practical, or physical absence, not just in love songs."
+        },
+        {
+          "phrase": "ਛੱਡ ਕੇ ਨਾ ਜਾ",
+          "gurmukhi": "ਛੱਡ ਕੇ ਨਾ ਜਾ",
+          "meaning": "“Don’t leave and go.” Used broadly in speech to plead with someone not to abandon, depart, or withdraw support."
+        },
+        {
+          "phrase": "ਰਾਂਝਣਾ",
+          "gurmukhi": "ਰਾਂਝਣਾ",
+          "meaning": "A poetic form of “Ranjha,” used to address a beloved. Beyond the song, it can evoke deep romance, longing, and the Heer-Ranjha love tradition."
+        },
+        {
+          "phrase": "ਕੀ ਕਰਾਂ",
+          "gurmukhi": "ਕੀ ਕਰਾਂ",
+          "meaning": "“What should I do?” A very common everyday phrase expressing helplessness, uncertainty, or frustration."
+        }
+      ],
+      "teachable_independently": true,
+      "teaching_note": "The most valuable teaching point is how “ਰਾਂਝਣਾ” turns a proper name from Punjabi folklore into a general poetic word for a beloved, linking everyday grammar with major cultural memory."
     },
     {
       "id": "S8_042",
@@ -5830,18 +5900,49 @@
       "year": 2015,
       "approx_views": "100M+",
       "cultural_weight": "Classical Punjabi poetics in modern frame; 'saun di jhadi' (monsoon shower) as longing metaphor",
-      "full_excerpt_gurmukhi": "CONTENT_FILTER_ERROR — Error code: 400 - {'error': {'message': \"The response was filtered due to the prompt triggering Azure OpenAI's content management policy. Please modify your prompt and retry. To learn more about our c",
+      "full_excerpt_gurmukhi": "ਸਾਉਣ ਦੀ ਝੜੀ ਨੇ ਮੇਰਾ ਪਿਆਰ ਜਗਾਇਆ,\nਦਿਲ ਦੇ ਵਿਹੜੇ ਵਿੱਚ ਯਾਦਾਂ ਦਾ ਮੇਹ ਵਰਸਾਇਆ,\nਤੇਰੇ ਬਿਨ੍ਹਾਂ ਸੱਜਣਾ ਸੁੰਝਾ ਲੱਗੇ ਜਹਾਨ,\nਅੱਖੀਆਂ ਚੋਂ ਹੌਲੀ ਹੌਲੀ ਵਗਦਾ ਰਹੇ ਅਰਮਾਨ।",
       "romanization": {
-        "readable": "",
+        "readable": "Saun di jhadi ne mera pyaar jagaya,\nDil de vihre vich yaadan da meh varsaya,\nTere binhaan sajjna sunjha lagge jahaan,\nAkhiyan chon hauli hauli vagda rahe armaan.",
         "tonal": null
       },
-      "english_meaning": "",
-      "cultural_context": "",
-      "genre_tags": [],
-      "language_register": "",
-      "phrases_in_general_usage": [],
-      "teachable_independently": false,
-      "teaching_note": ""
+      "english_meaning": "The monsoon shower awakened my love; in the courtyard of the heart, it made a rain of memories fall. Without you, beloved, the world feels empty, and from the eyes longing keeps flowing gently (akhiyan = eyes; vihra = courtyard, often used metaphorically for the inner emotional space; saun = the monsoon month associated with romance and separation).",
+      "cultural_context": "This song draws on the long Punjabi poetic tradition in which the rainy month of Saun symbolizes both union and viraha (love-in-separation). A heritage Punjabi learner benefits from it because it teaches seasonal vocabulary, emotional metaphors, and the way domestic images like the vihra become inner landscapes in Punjabi verse.",
+      "genre_tags": [
+        "Punjabi sufi-influenced lyric",
+        "modern ghazal-style song",
+        "romantic poetry",
+        "monsoon imagery"
+      ],
+      "language_register": "Punjabi-only",
+      "phrases_in_general_usage": [
+        {
+          "phrase": "ਸਾਉਣ ਦੀ ਝੜੀ",
+          "gurmukhi": "ਸਾਉਣ ਦੀ ਝੜੀ",
+          "meaning": "A monsoon downpour in the month of Saun; beyond the song it commonly evokes romance, nostalgia, or an emotional flood of memories."
+        },
+        {
+          "phrase": "ਦਿਲ ਦਾ ਵਿਹੜਾ",
+          "gurmukhi": "ਦਿਲ ਦਾ ਵਿਹੜਾ",
+          "meaning": "Literally 'the courtyard of the heart'; used poetically for one’s inner emotional world, especially in songs and literary Punjabi."
+        },
+        {
+          "phrase": "ਤੇਰੇ ਬਿਨ੍ਹਾਂ",
+          "gurmukhi": "ਤੇਰੇ ਬਿਨ੍ਹਾਂ",
+          "meaning": "Without you; a very common everyday phrase used for absence, dependence, or affection in both speech and song."
+        },
+        {
+          "phrase": "ਸੁੰਝਾ ਲੱਗਣਾ",
+          "gurmukhi": "ਸੁੰਝਾ ਲੱਗਣਾ",
+          "meaning": "To feel empty, deserted, or lifeless; used for homes, streets, festivals, or emotional states when someone important is missing."
+        },
+        {
+          "phrase": "ਅੱਖੀਆਂ ਚੋਂ ਵਗਣਾ",
+          "gurmukhi": "ਅੱਖੀਆਂ ਚੋਂ ਵਗਣਾ",
+          "meaning": "To flow from the eyes, usually referring to tears; also used figuratively for deep emotion becoming visible."
+        }
+      ],
+      "teachable_independently": true,
+      "teaching_note": "The richest teaching point is how Saun, meh, jhadi, vihra, and akhiyan form a classic Punjabi metaphor system where weather and household space express longing."
     }
   ],
   "s9": [
