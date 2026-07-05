@@ -102,11 +102,17 @@ def generate_proverbs() -> list:
     return proverbs
 
 
+EXCLUDED_STREAMS = {"s8"}  # S8 Modern Songs removed — translations need rebuild
+
+
 def generate_streams() -> dict[str, list]:
     streams = {}
 
     for path in sorted(STREAMS_DIR.glob("s*_enriched.json")):
         stream_key = path.name.split("_", 1)[0]
+        if stream_key in EXCLUDED_STREAMS:
+            print(f"Skipping excluded stream: {stream_key} ({path.name})")
+            continue
         items = load_json_file(path)
         if items is None:
             continue
