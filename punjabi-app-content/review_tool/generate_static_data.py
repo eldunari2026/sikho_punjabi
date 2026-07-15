@@ -106,7 +106,7 @@ EXCLUDED_STREAMS = {"s8"}  # S8 Modern Songs removed — translations need rebui
 
 
 def generate_streams() -> dict[str, list]:
-    streams = {}
+    streams: dict[str, list] = {}
 
     for path in sorted(STREAMS_DIR.glob("s*_enriched.json")):
         stream_key = path.name.split("_", 1)[0]
@@ -119,7 +119,13 @@ def generate_streams() -> dict[str, list]:
         if not isinstance(items, list):
             print(f"Warning: {path} did not contain a JSON array, skipping")
             continue
-        streams[stream_key] = items
+        # A stream can be assembled from more than one source file (e.g. s5's
+        # original copyrighted-poets tier plus a later public-domain-poets
+        # tier) — merge by stream key instead of letting later files
+        # overwrite earlier ones.
+        if stream_key in streams:
+            print(f"Merging additional {len(items)} item(s) into stream {stream_key} from {path.name}")
+        streams.setdefault(stream_key, []).extend(items)
 
     return {key: streams[key] for key in sorted(streams, key=stream_sort_key)}
 

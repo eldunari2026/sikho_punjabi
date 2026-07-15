@@ -4,7 +4,11 @@
       "WebFetch(domain:www.panjabdigilib.org)",
       "WebFetch(domain:www.elearnpunjabi.com)",
       "WebFetch(domain:pt.learnpunjabi.org)",
-      "Bash(codex *)"
+      "Bash(codex *)",
+      "WebFetch(domain:pmc.ncbi.nlm.nih.gov)",
+      "WebFetch(domain:carla.umn.edu)",
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" -o /private/tmp/claude-501/-Users-arjunsingh-Documents-Sikho-Punjabi/0ae0a538-a49a-48d1-85e8-aee39a1f8b3c/scratchpad/richards.pdf \"https://www.professorjackrichards.com/wp-content/uploads/Curriculum-Approaches-in-Language-Teaching.pdf\" -w \"\\\\nHTTP_STATUS:%{http_code}\\\\n\")",
+      "WebFetch(domain:files.eric.ed.gov)"
     ]
   }
 }
